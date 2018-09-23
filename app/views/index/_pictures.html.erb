@@ -1,0 +1,21 @@
+<div id="pictures" class="page-section scrollspy">
+  <div class="container">
+      <div class="hide-on-small-only">
+        <%= image_tag "carousel/carousel01.jpeg", id:"picture-main", style: 'width: 100%' %>
+      </div>
+      <div class="owl-carousel owl-theme">
+        <a class="waves-effect hoverable">
+          <img class="owl-lazy" data-src="<%= image_path("carousel/carousel01.jpeg") %>" alt="">
+        </a>
+        <a class="waves-effect hoverable">
+          <img class="owl-lazy" data-src="<%= image_path("carousel/carousel02.jpeg") %>" alt="">
+        </a>
+        <a class="waves-effect hoverable">
+          <img class="owl-lazy" data-src="<%= image_path("carousel/carousel03.jpeg") %>" alt="">
+        </a>
+        <a class="waves-effect hoverable">
+          <img class="owl-lazy" data-src="<%= image_path("carousel/carousel04.jpeg") %>" alt="">
+        </a>
+      </div>
+  </div>
+</div>

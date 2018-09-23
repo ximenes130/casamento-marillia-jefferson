@@ -16,6 +16,7 @@
 //= require turbolinks
 //= require materialize
 //= require owl.carousel/dist/owl.carousel
+//= require animejs/anime
 //= require_tree .
 
 
@@ -58,16 +59,102 @@ $(document).ready(function () {
 	});
 
 	$('.owl-carousel').owlCarousel(owlData)
-	$('.history-next').click(historyNext)
 	$('#pictures .owl-carousel img').click(picturesItemClick)
+	init_histories();
 });
 
+function init_histories(){
+	data['histories']['index'] = 0;
+	setDisplayedHistory(0);
+	$('#history-range').attr('max', data['histories'].length - 1);
+	$('#history-range').on('input',function(){
+		setDisplayedHistory(this.value);
+	});
+	$('.history-next').click(historyNext);
+	$('.history-previous').click(historyPrev);
+}
+
+function setDisplayedHistory(index){
+	$('#history .text-navigator-title').text(data['histories'][index].title);
+	$('#history .text-navigator-content').text(data['histories'][index].text);
+	document.getElementById('history-range').value = index;
+}
 
 // Handling events
 
-function historyNext() {
-	Animations.exitRight('#history .flow-text, #history h3')
-	Animations.enterLeft('#history .flow-text, #history h3')
+function historyNext(e) {
+	// Preventing link default behaviour
+	e.preventDefault();
+
+	// Calculating new index
+	let index = data['histories']['index'] = (data['histories']['index'] + 1) % data['histories'].length;
+
+	// Animating transition
+	let animationTargets = '#history .flow-text, #history h3';
+	anime.timeline()
+		.add({
+			targets: animationTargets,
+			duration: 500,
+			translateX: "150px",
+			opacity: "0",
+			easing: 'easeInOutQuad',
+			complete: function(anim) {
+				setDisplayedHistory(index);
+			}
+		})
+		.add({
+			targets: animationTargets,
+			duration: 0,
+			translateX: "-150px"
+		})
+		.add({
+			targets: animationTargets,
+			duration: 500,
+			translateX: "0px",
+			opacity: "1",
+			easing: 'easeInOutQuad'
+		});
+}
+
+function historyPrev(e) {
+	// Preventing link default behaviour
+	e.preventDefault();
+
+	// Calculating new index
+	let index = data['histories']['index'] - 1;
+
+	if(index < 0){
+		index = data['histories']['index'] = data['histories'].length - 1;
+	}else{
+		data['histories']['index'] = index;
+	}
+
+	// Animating transition
+	let animationTargets = '#history .flow-text, #history h3';
+
+	anime.timeline()
+	.add({
+		targets: animationTargets,
+		duration: 500,
+		translateX: "-150px",
+		opacity: "0",
+		easing: 'easeInOutQuad',
+		complete: function(anim) {
+			setDisplayedHistory(index);
+		}
+	})
+	.add({
+		targets: animationTargets,
+		duration: 0,
+		translateX: "150px"
+	})
+	.add({
+		targets: animationTargets,
+		duration: 500,
+		translateX: "0px",
+		opacity: "1",
+		easing: 'easeInOutQuad'
+	});
 }
 
 function picturesItemClick(event) {
@@ -78,13 +165,20 @@ function picturesItemClick(event) {
 
 // Setting Animations
 
-Animations.enterLeft = function (selectorOrEl) {
-	var element = $(selectorOrEl)
-	element.velocity({ opacity: "0", translateX: "-100px" }, { duration: 0 });
-	element.velocity({ opacity: "1", translateX: "0" }, { duration: 1200, easing: [60, 10] });
+Animations.enterLeft = function (selector) {
+	console.log(selector)
+	
+	// element.velocity({ opacity: "0", translateX: "-100px" }, { duration: 0 });
+	// element.velocity({ opacity: "1", translateX: "0" }, { duration: 1200, easing: [60, 10] });
 };
 
-Animations.exitRight = function (selectorOrEl) {
-	var element = $(selectorOrEl)
-	element.velocity({ opacity: "0", translateX: "100px" }, { duration: 1200, easing: [60, 10] });
+Animations.exitRight = function (selector) {
+	anime({
+		targets: selector,
+		translateX: "-100px",
+		opacity: "0",
+		easing: 'easeInOutQuad'
+	});
+	// var element = $(selectorOrEl)
+	// element.velocity({ opacity: "0", translateX: "100px" }, { duration: 1200, easing: [60, 10] });
 };

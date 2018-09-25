@@ -61,6 +61,7 @@ $(document).ready(function () {
 	$('.owl-carousel').owlCarousel(owlData)
 	$('#pictures .owl-carousel img').click(picturesItemClick)
 	init_histories();
+	init_timer($('.header .content h6'));
 });
 
 function init_histories(){
@@ -182,3 +183,37 @@ Animations.exitRight = function (selector) {
 	// var element = $(selectorOrEl)
 	// element.velocity({ opacity: "0", translateX: "100px" }, { duration: 1200, easing: [60, 10] });
 };
+
+// Timer function
+function init_timer(element) {
+	var start = Date.parse("2019-10-15T13:00"),
+			diff,
+			days,
+			minutes,
+			hours,
+			seconds;
+
+	function timer() {
+			// get the number of seconds that have elapsed since 
+			// startTimer() was called
+			diff = 1000 - (((Date.now() - start) / 1000) | 0);
+
+			// does the same job as parseInt truncates the float
+			seconds = (diff % 60) | 0;
+			minutes = ((diff / 60) % 60) | 0;
+			hours 	= (((diff / 60) / 60) % 24) | 0;
+			days 		= (((diff / 60) / 60) / 24) | 0;
+
+			minutes = minutes < 10 ? "0" + minutes : minutes;
+			hours = hours < 10 ? "0" + hours : hours;
+
+			element.text("FALTAM SOMENTE " + days + "D " + hours + "H " + minutes + "M " + seconds + "S");
+
+			if (diff <= 0) {
+					element.text("");
+			}
+	};
+	// we don't want to wait a full second before the timer starts
+	timer();
+	setInterval(timer, 1000);
+}

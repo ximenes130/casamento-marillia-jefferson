@@ -186,7 +186,7 @@ Animations.exitRight = function (selector) {
 
 // Timer function
 function init_timer(element) {
-	var start = Date.parse("2019-10-15T13:00"),
+	var start = Date.parse("2019-02-16T13:00"),
 			diff,
 			days,
 			minutes,

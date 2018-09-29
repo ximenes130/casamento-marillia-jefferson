@@ -1,33 +1,45 @@
 
-<div class="page-section scrollspy" style="background: url(<%= image_path 'bg.jpeg'%>); background-attachment: fixed;">
+<div id="cards" class="page-section scrollspy" style="background: url(<%= image_path 'bg.jpeg'%>); background-attachment: fixed;">
   <div class="container" >
       <div class="row">
           <div class="col s12 m4">
-            <div class="card ">
-            <div class="card-content">
-              <span class="card-title">Card Title</span>
-              <p>I am a very simple card. I am good at containing small bits of information.
-              I am convenient because I require little markup to use effectively.</p>
-            </div>
-            </div>
+            <a href="https://maps.google.com">
+              <div class="card hoverable black-text">
+                <div class="card-image">
+                  <%= image_tag 'map.png' %>
+                </div>
+                <div class="card-content">
+                  <span class="card-title">Localização</span>
+                  <p>Salão bem legal na, casa X, rua Y, bairro tal, Brasília, DF </p>
+                </div>
+              </div>
+            </a>
           </div>
           <div class="col s12 m4">
-            <div class="card ">
-            <div class="card-content">
-              <span class="card-title">Card Title</span>
-              <p>I am a very simple card. I am good at containing small bits of information.
-              I am convenient because I require little markup to use effectively.</p>
-            </div>
-            </div>
+            <a href="https://maps.google.com">
+              <div class="card hoverable black-text">
+                <div class="card-image">
+                  <%= image_tag 'gift.jpg' %>
+                </div>
+                <div class="card-content">
+                  <span class="card-title">Lista de Presentes</span>
+                  <p>Lista de presentes disponivel no site www.lista.com.br</p>
+                </div>
+              </div>
+            </a>
           </div>
           <div class="col s12 m4">
-            <div class="card ">
-            <div class="card-content">
-              <span class="card-title">Card Title</span>
-              <p>I am a very simple card. I am good at containing small bits of information.
-              I am convenient because I require little markup to use effectively.</p>
-            </div>
-            </div>
+            <a href="https://maps.google.com">
+              <div class="card hoverable black-text">
+                <div class="card-image">
+                  <%= image_tag 'carousel/carousel02.jpeg' %>
+                </div>
+                <div class="card-content">
+                  <span class="card-title">Mais um Card</span>
+                  <p>Mais um cartão de demontração para preencher espaço</p>
+                </div>
+              </div>
+            </a>
           </div>
       </div>
   </div>

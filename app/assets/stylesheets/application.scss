@@ -14,6 +14,9 @@
  *= require_self
  */
 
+$primary-color: #b71c1c !default;
+$secondary-color: $primary-color !default;
+
 @import "materialize";
 @import "material_icons";
 @import "owl.carousel/dist/assets/owl.carousel";

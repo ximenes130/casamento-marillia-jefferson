@@ -1,0 +1,2 @@
+class Honour < ApplicationRecord
+end

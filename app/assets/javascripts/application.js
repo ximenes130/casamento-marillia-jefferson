@@ -61,6 +61,7 @@ $(document).ready(function () {
 	$('.owl-carousel').owlCarousel(owlData)
 	$('#pictures .owl-carousel img').click(picturesItemClick)
 	init_histories();
+	init_honours();
 	init_timer($('.header .content h6'));
 });
 
@@ -75,10 +76,27 @@ function init_histories(){
 	$('.history-previous').click(historyPrev);
 }
 
+function init_honours(){
+	data['honours']['index'] = 0;
+	setDisplayedHonour(0);
+	$('#honour-range').attr('max', data['honours'].length - 1);
+	$('#honour-range').on('input',function(){
+		setDisplayedHonour(this.value);
+	});
+	$('.honour-next').click(honourNext);
+	$('.honour-previous').click(honourPrev);
+}
+
 function setDisplayedHistory(index){
 	$('#history .text-navigator-title').text(data['histories'][index].title);
 	$('#history .text-navigator-content').text(data['histories'][index].text);
 	document.getElementById('history-range').value = index;
+}
+
+function setDisplayedHonour(index){
+	$('#honour .text-navigator-title').text(data['honours'][index].title);
+	$('#honour .text-navigator-content').text(data['honours'][index].text);
+	document.getElementById('honour-range').value = index;
 }
 
 // Handling events
@@ -142,6 +160,81 @@ function historyPrev(e) {
 		easing: 'easeInOutQuad',
 		complete: function(anim) {
 			setDisplayedHistory(index);
+		}
+	})
+	.add({
+		targets: animationTargets,
+		duration: 0,
+		translateX: "150px"
+	})
+	.add({
+		targets: animationTargets,
+		duration: 500,
+		translateX: "0px",
+		opacity: "1",
+		easing: 'easeInOutQuad'
+	});
+}
+
+function honourNext(e) {
+	// Preventing link default behaviour
+	e.preventDefault();
+
+	// Calculating new index
+	let index = data['honours']['index'] = (data['honours']['index'] + 1) % data['honours'].length;
+
+	// Animating transition
+	let animationTargets = '#honour .flow-text, #honour h3';
+	anime.timeline()
+		.add({
+			targets: animationTargets,
+			duration: 500,
+			translateX: "150px",
+			opacity: "0",
+			easing: 'easeInOutQuad',
+			complete: function(anim) {
+				setDisplayedHonour(index);
+			}
+		})
+		.add({
+			targets: animationTargets,
+			duration: 0,
+			translateX: "-150px"
+		})
+		.add({
+			targets: animationTargets,
+			duration: 500,
+			translateX: "0px",
+			opacity: "1",
+			easing: 'easeInOutQuad'
+		});
+}
+
+function honourPrev(e) {
+	// Preventing link default behaviour
+	e.preventDefault();
+
+	// Calculating new index
+	let index = data['honours']['index'] - 1;
+
+	if(index < 0){
+		index = data['honours']['index'] = data['honours'].length - 1;
+	}else{
+		data['honours']['index'] = index;
+	}
+
+	// Animating transition
+	let animationTargets = '#honour .flow-text, #honour h3';
+
+	anime.timeline()
+	.add({
+		targets: animationTargets,
+		duration: 500,
+		translateX: "-150px",
+		opacity: "0",
+		easing: 'easeInOutQuad',
+		complete: function(anim) {
+			setDisplayedHonour(index);
 		}
 	})
 	.add({

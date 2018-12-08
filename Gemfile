@@ -40,6 +40,17 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'materialize-sass', '~> 1.0.0'
 gem 'material_icons' 
 
+# Authentication solution for Rails based on Warden
+gem 'devise'
+
+# Rails engine that provides an easy-to-use interface for managing your data
+gem 'rails_admin', '~> 1.3'
+gem 'rails_admin-i18n'
+gem 'rails_admin_material_theme', '~> 0.2.0'
+
+# An authorization library for Ruby
+gem 'cancancan', '~> 2.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -55,6 +66,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  # Test environment variables
+  gem 'dotenv-rails'
 end
 
 group :test do

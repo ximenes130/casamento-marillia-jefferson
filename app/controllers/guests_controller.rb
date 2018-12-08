@@ -4,7 +4,11 @@ class GuestsController < ApplicationController
   # GET /guests
   # GET /guests.json
   def index
-    @guests = Guest.where('name LIKE ? AND confirmed IS ?', "#{params[:guest][:name]}%", false).limit(3) if params[:guest].present?
+    if params[:guest][:name].size > 3
+      @guests = Guest.where('name LIKE ? AND confirmed IS ?', "#{params[:guest][:name]}%", false).limit(3) if params[:guest].present?
+    else
+      @guests = []
+    end
 
     respond_to :html, :js
     respond_to do |format|

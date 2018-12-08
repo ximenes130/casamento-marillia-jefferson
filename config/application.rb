@@ -8,6 +8,8 @@ Bundler.require(*Rails.groups)
 
 module CasamentoMarilliaJefferson
   class Application < Rails::Application
+    ENV['RAILS_ADMIN_THEME'] = 'material_theme'
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 

@@ -5,7 +5,7 @@ class GuestsController < ApplicationController
   # GET /guests.json
   def index
     if params[:guest][:name].size > 3
-      @guests = Guest.where('name LIKE ? AND confirmed IS ?', "#{params[:guest][:name]}%", false).limit(3) if params[:guest].present?
+      @guests = Guest.where('unaccent(name) ILIKE unaccent(?) AND confirmed IS ?', "#{params[:guest][:name]}%", false).limit(3) if params[:guest].present?
     else
       @guests = []
     end

@@ -88,15 +88,25 @@ function init_honours(){
 }
 
 function setDisplayedHistory(index){
-	$('#history .text-navigator-title').text(data['histories'][index].title);
-	$('#history .text-navigator-content').text(data['histories'][index].text);
-	document.getElementById('history-range').value = index;
+	try {
+		$('#history .text-navigator-title').text(data['histories'][index].title);
+		$('#history .text-navigator-content').text(data['histories'][index].text);
+		document.getElementById('history-range').value = index;
+	}
+	catch(err) {
+		console.log(err)
+	}
 }
 
 function setDisplayedHonour(index){
-	$('#honour .text-navigator-title').text(data['honours'][index].title);
-	$('#honour .text-navigator-content').text(data['honours'][index].text);
-	document.getElementById('honour-range').value = index;
+	try {
+		$('#honour .text-navigator-title').text(data['honours'][index].title);
+		$('#honour .text-navigator-content').text(data['honours'][index].text);
+		document.getElementById('honour-range').value = index;
+	}
+	catch(err) {
+		console.log(err)
+	}
 }
 
 // Handling events

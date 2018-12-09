@@ -4,7 +4,7 @@
         <%= image_tag "carousel/carousel01.jpeg", id:"picture-main", style: 'width: 100%' %>
       </div>
       <div class="owl-carousel owl-theme">
-        <% (1..19).each do |index| %>
+        <% (1..17).each do |index| %>
           <a class="waves-effect hoverable">
             <img class="owl-lazy" data-src="<%= image_path("carousel/carousel#{format('%02d', index)}.jpg") %>" alt="">
           </a>

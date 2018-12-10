@@ -28,6 +28,8 @@ var Animations = {},
 		margin: 10,
 		responsiveClass:true,
 		center: true,
+		nav: false,
+		dots: true,
 		//   autoWidth:true,
 		lazyLoad: true,
 		responsive: {
